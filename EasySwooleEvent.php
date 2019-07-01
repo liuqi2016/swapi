@@ -14,6 +14,9 @@ use EasySwoole\EasySwoole\Swoole\EventRegister;
 use EasySwoole\EasySwoole\AbstractInterface\Event;
 use EasySwoole\Http\Request;
 use EasySwoole\Http\Response;
+use EasySwoole\EasySwoole\Config as GConfig;
+use EasySwoole\MysqliPool\Mysql;
+use EasySwoole\Mysqli\Config;
 
 class EasySwooleEvent implements Event
 {
@@ -31,7 +34,7 @@ class EasySwooleEvent implements Event
 
     public static function onRequest(Request $request, Response $response): bool
     {
-        print_r($request->getRequestParam());
+        var_dump($request->getRequestParam());
         // TODO: Implement onRequest() method.
         return true;
     }

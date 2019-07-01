@@ -7,6 +7,8 @@
     "name": "liuqi/swapi",
     "require": {
         "easyswoole/easyswoole": "3.x",
-        "easyswoole/swoole-ide-helper": "^1.3"
+        "easyswoole/swoole-ide-helper": "^1.3",
+        "easyswoole/mysqli": "^1.2",
+        "easyswoole/mysqli-pool": "^1.0"
     }
 }

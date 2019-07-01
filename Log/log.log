@@ -1,0 +1,12 @@
+[2019-07-01 15:52:35][DEBUG][ERROR] : [Uncaught Swoole\Exception: failed to listen server port[0.0.0.0:9501], Error: Address already in use[48] in /Users/liuqi/wwwroot/www/swapi/vendor/easyswoole/easyswoole/src/ServerManager.php:56
+Stack trace:
+#0 /Users/liuqi/wwwroot/www/swapi/vendor/easyswoole/easyswoole/src/ServerManager.php(56): Swoole\Server->__construct('0.0.0.0', 9501, 2, 1)
+#1 /Users/liuqi/wwwroot/www/swapi/vendor/easyswoole/easyswoole/src/Core.php(117): EasySwoole\EasySwoole\ServerManager->createSwooleServer(9501, 2, '0.0.0.0', Array, 2, 1)
+#2 /Users/liuqi/wwwroot/www/swapi/vendor/easyswoole/easyswoole/src/Command/DefaultCommand/Start.php(42): EasySwoole\EasySwoole\Core->createServer()
+#3 /Users/liuqi/wwwroot/www/swapi/vendor/easyswoole/easyswoole/src/Command/CommandContainer.php(44): EasySwoole\EasySwoole\Command\DefaultCommand\Start->exec(Array)
+#4 /Users/liuqi/wwwroot/www/swapi/vendor/easyswoole/easyswoole/src/Command/CommandRunner.php(52): EasySwoole\EasySwoole\Command\CommandContainer->hook('start', Array)
+#5 /Users/liuqi/wwwroot/www at file:/Users/liuqi/wwwroot/www/swapi/vendor/easyswoole/easyswoole/src/ServerManager.php line:56]
+[2019-07-01 15:54:31][DEBUG][NOTICE] : [Methods with the same name as their class will not be constructors in a future version of PHP; Index has a deprecated constructor at file:/Users/liuqi/wwwroot/www/swapi/App/HttpController/Index.php line:5]
+[2019-07-01 15:54:31][DEBUG][NOTICE] : [Methods with the same name as their class will not be constructors in a future version of PHP; Index has a deprecated constructor at file:/Users/liuqi/wwwroot/www/swapi/App/HttpController/Index.php line:5]
+[2019-07-01 16:42:07][DEBUG][ERROR] : [Class 'App\HttpController\Status' not found at file:/Users/liuqi/wwwroot/www/swapi/App/HttpController/Index.php line:29]
+[2019-07-01 16:44:02][DEBUG][ERROR] : [Class 'App\HttpController\Status' not found at file:/Users/liuqi/wwwroot/www/swapi/App/HttpController/Index.php line:29]

@@ -4,7 +4,7 @@
  * Created by PhpStorm.
  * User: yf
  * Date: 2018/5/28
- * Time: 下午6:33
+ * Time: 下坈6:33
  */
 
 namespace EasySwoole\EasySwoole;
@@ -14,9 +14,11 @@ use EasySwoole\EasySwoole\Swoole\EventRegister;
 use EasySwoole\EasySwoole\AbstractInterface\Event;
 use EasySwoole\Http\Request;
 use EasySwoole\Http\Response;
-use EasySwoole\EasySwoole\Config as GConfig;
-use EasySwoole\MysqliPool\Mysql;
-use EasySwoole\Mysqli\Config;
+use App\Service\UserService;
+use EasySwoole\Rpc\Rpc;
+use EasySwoole\Rpc\Config;
+use EasySwoole\Rpc\NodeManager\RedisManager;
+use EasySwoole\Component\Timer;
 
 class EasySwooleEvent implements Event
 {
@@ -29,18 +31,31 @@ class EasySwooleEvent implements Event
 
     public static function mainServerCreate(EventRegister $register)
     {
-        // TODO: Implement mainServerCreate() method.
+        #####################  rpc ??1 #######################
+        $config = new Config();
+        //??????
+        $config->setServerIp('127.0.0.1');
+        $config->setNodeManager(new RedisManager('127.0.0.1', 6379));
+        $config->getBroadcastConfig()->setSecretKey('lucky');
+
+        $rpc = Rpc::getInstance($config);
+        $rpc->add(new UserService());
+        $rpc->attachToServer(ServerManager::getInstance()->getSwooleServer());
+        #####################  rpc ??1 #######################
+        #####################  token?? #######################
     }
 
     public static function onRequest(Request $request, Response $response): bool
     {
-        var_dump($request->getRequestParam());
+        // var_dump($request->getRequestParam());
         // TODO: Implement onRequest() method.
         return true;
     }
 
     public static function afterRequest(Request $request, Response $response): void
     {
-        // TODO: Implement afterAction() method.
+        $responseMsg = $response->getBody()->__toString();
+        Logger::getInstance()->console("????:" . $responseMsg);
+        var_dump($response->getStatusCode());
     }
 }

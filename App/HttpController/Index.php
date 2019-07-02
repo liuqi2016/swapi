@@ -8,6 +8,10 @@ use EasySwoole\Validate\Validate;
 use App\Model\Member\MemberModel;
 use App\Model\ConditionBean;
 use EasySwoole\Spl\SplBean;
+use App\Utility\Pool\RedisPool;
+use EasySwoole\Rpc\Rpc;
+use EasySwoole\Rpc\Response;
+use App\Service\UserService;
 
 class Index extends Controller
 {
@@ -32,6 +36,20 @@ class Index extends Controller
         $this->response()->write("this is test2!");
         return true;
     }
+    function testRpc()
+    {
+        $client = Rpc::getInstance()->client();
+        go(function () use ($client) {
+            $client->addCall('UserService', 'register', ['arg1', 'arg2'])
+                ->setOnFail(function (Response $response) {
+                    print_r($response->toArray());
+                })
+                ->setOnSuccess(function (Response $response) {
+                    print_r($response->toArray());
+                });
+            $client->exec();
+        });
+    }
     function testMysql()
     {
         //由于Member4Model构造函数已经获取了一条数据库连接
@@ -42,6 +60,13 @@ class Index extends Controller
         $conditionBean->addWhere('name', '', '<>');
         $data = $memberModel->getAll($conditionBean->toArray([], SplBean::FILTER_NOT_NULL));
         $this->response()->write(json_encode($data));
+    }
+    function testRedis()
+    {
+        /** @var Redis $redis */
+        $redis = RedisPool::defer();
+        $redis->set('test', 'test');
+        $this->response()->write($redis->get('test'));
     }
     function onRequest(?string $action): ?bool
     {

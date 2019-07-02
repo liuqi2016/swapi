@@ -13,6 +13,8 @@ class Router extends AbstractRouter
         $this->setGlobalMode(true);
         $routeCollector->addRoute('GET', '/index', '/Index/index');
         $routeCollector->addRoute('GET', '/testmysql', '/Index/testMysql');
+        $routeCollector->addRoute('GET', '/testredis', '/Index/testRedis');
+        $routeCollector->addRoute('GET', '/testrpc', '/Index/testRpc');
         // $routeCollector->get('/index', '/Index/index');
         // $routeCollector->get('/user', '/index.html');
         // $routeCollector->get('/', function (Request $request, Response $response) {

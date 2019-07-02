@@ -23,7 +23,7 @@ class BaseModel
     private $db;
     function __construct()
     {
-        $this->db = PoolManager::getInstance()->getPool(MysqlPool::class)->getObj();
+        $this->db = MysqlPool::defer();
     }
     protected function getDb(): MysqlObject
     {
@@ -33,9 +33,9 @@ class BaseModel
     {
         return $this->db;
     }
-    public function __destruct()
-    {
-        PoolManager::getInstance()->getPool(MysqlPool::class)->recycleObj($this->getDb());
-        // TODO: Implement __destruct() method.
-    }
+    // public function __destruct()
+    // {
+    //     PoolManager::getInstance()->getPool(MysqlPool::class)->recycleObj($this->getDb());
+    //     // TODO: Implement __destruct() method.
+    // }
 }
